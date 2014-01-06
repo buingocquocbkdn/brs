@@ -1,4 +1,18 @@
 Brs::Application.routes.draw do
+  
+  root to:  'static_pages#home'
+  resources :sessions, only: [:new, :create, :destroy]
+  
+  resources :users
+  get "users/new"
+  match '/signup',  to: 'users#new',            via: 'get'
+  match '/signout', to: 'sessions#destroy',     via: 'delete'
+  match '/signin',  to: 'sessions#new',         via: 'get'
+  #match '/signout', to: 'sessions#destroy',     via: 'delete'
+  
+  
+  namespace :admin do
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
