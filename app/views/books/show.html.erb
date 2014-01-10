@@ -28,6 +28,11 @@
         </div>
       </div>
     <% end %>
+    <% if @book.rating.nil? %>
+      Average rate book: 0 stars
+    <% else %>
+      Average rate book: <%= @book.rating %> stars
+    <% end %>
     <li>
       <% if @buy.nil? %>
         <% @buy = @book.buys.build() %>
