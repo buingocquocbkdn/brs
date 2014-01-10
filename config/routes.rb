@@ -33,6 +33,9 @@ Brs::Application.routes.draw do
     root to: 'books#index'
     resources :books
     resources :users
+    resources :buys, only: [:index, :update, :destroy]
+    match 'buys/:id/:request', to: 'buys#update', as: 'buy_request', via: 'patch'
+
     resources :sessions, only: [:new, :create, :destroy]
     match 'signout', to: 'sessions#destroy',     via: 'delete'
     match 'signin',  to: 'sessions#new',         via: 'get'

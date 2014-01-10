@@ -1,0 +1,24 @@
+<% provide(:title, "Show all requests to buy") %>
+<h2>Show all requests to buy</h2>
+<table class="table">
+	<thear>
+		<tr>
+			<th>STT</th>
+			<th>Title books</th>
+			<th>Username</th>
+			<th>Email</th>
+			<th>Request Buy in Date</th>
+			<th>Bought in Date</th>
+			<th>Accept request</th>
+			<th>Delete</th>
+		</tr>
+  </thear>
+	<tbody>
+		<% if @buys.any? %>
+		<%= render @buys %>
+		<% end %>
+	</tbody>
+	<tfoot>
+    <%= will_paginate %>
+	</tfoot>
+</table>

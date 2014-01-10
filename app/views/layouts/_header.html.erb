@@ -32,7 +32,7 @@
         <% else %>
           <li><%= link_to "List Books", admin_books_path %></li>
           <li><%= link_to "List Users", admin_users_path %></li>
-          <li><%= link_to "List Request Buy", "#" %></li>
+          <li><%= link_to "List Request Buy", admin_buys_path %></li>
           <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 Account <%=@current_admin.username%><b class="caret"></b>

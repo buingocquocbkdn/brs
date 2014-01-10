@@ -1,0 +1,7 @@
+<% if @buy.bought? %>
+$("#approve_date_<%=@buy.id%>").html('<%=@buy.approve_buy_date%>');
+$("#request_<%=@buy.id%>").html("<%= escape_javascript(render('admin/buys/cancel', buy: @buy)) %>")
+<% else %>
+$("#approve_date_<%=@buy.id%>").html("Waiting");
+$("#request_<%=@buy.id%>").html("<%= escape_javascript(render('admin/buys/accept', buy: @buy)) %>")
+<% end%>

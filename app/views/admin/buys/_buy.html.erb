@@ -1,0 +1,22 @@
+<tr>
+	<td><%= buy.id %></td>
+	<td><%= link_to buy.book.title, admin_book_path(buy.book) %>
+	</td>
+	<td><%= link_to buy.user.username, admin_user_path(buy.user)%></td>
+	<td><%= link_to buy.user.email, admin_user_path(buy.user)%></td>
+	<td><%= buy.created_at%></td>
+	<td id="approve_date_<%=buy.id%>">
+		<%= buy.approve_buy_date.nil? ? 'Waiting' : 
+	                         buy.approve_buy_date%>
+	</td>
+  <td id="request_<%=buy.id%>">
+		<% if buy.bought? %>
+      <%= render 'cancel', buy: buy %>
+	  <% else %>
+	  	<%= render 'accept', buy: buy %>
+	  <% end %>
+	</td>
+	<td><%= link_to "Delete", admin_buy_path(buy), method: :delete,
+                                  data: { confirm: "You sure?" },
+                                  class: "btn btn-small btn-primary"%>
+</tr>
