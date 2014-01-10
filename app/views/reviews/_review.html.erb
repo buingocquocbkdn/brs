@@ -2,4 +2,9 @@
 	<div> <%= link_to review.review_title %> </div>
 	<span class="content"> <%= review.content_review %></span>
 	<div> Reviews create at <%= review.created_at.strftime("%Y-%m-%d %a %H:%M:%S") %>  </div>
+	<% if current_user?(review.user) %>
+    <%= link_to "delete", book_review_path(@book.id, review.id), method: :delete,
+                                     data: { confirm: "You sure?" },
+                                     title: review.content_review %>
+  <% end %>
 </li>

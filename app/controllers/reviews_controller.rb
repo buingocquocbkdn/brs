@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :signed_in_user, only: [:create, :destroy]
+  before_action :correct_user,   only: :destroy
 
   def create
     @review = Review.new review_params
@@ -20,12 +21,19 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
+    @review.destroy
+    redirect_to book_path params[:book_id]
   end
   
   private
 
     def review_params
       params.require(:review).permit(:content_review, :review_title)
+    end
+    
+    def correct_user
+      @review = current_user.reviews.find_by(id: params[:id])
+      redirect_to root_url if @review.nil?
     end
 end
 
