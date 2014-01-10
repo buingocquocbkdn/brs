@@ -12,12 +12,27 @@ class ReviewsController < ApplicationController
     redirect_to book_path params[:book_id]
   end
   
+  def edit
+    @review = Review.find params[:id]
+    @book = Book.find params[:book_id]
+  end
+  
   def new
     @book = Book.find params[:book_id]
   end
   
   def show
     @review = Review.find params[:id]
+  end
+  
+  def update
+    @review = Review.find params[:id]
+    @book = Book.find params[:book_id]
+    if @review.update_attributes review_params
+      flash[:success] = "Review updated"
+    end
+      redirect_to book_path params[:book_id]
+  
   end
 
   def destroy
@@ -32,8 +47,7 @@ class ReviewsController < ApplicationController
     end
     
     def correct_user
-      @review = current_user.reviews.find_by(id: params[:id])
+      @review = current_user.reviews.find_by id: params[:id]
       redirect_to root_url if @review.nil?
     end
 end
-
