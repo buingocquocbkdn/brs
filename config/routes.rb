@@ -14,7 +14,9 @@ Brs::Application.routes.draw do
     resources :rates, only: [:create, :destroy, :update, :edit]
     resources :favourites, only: [:create]
     resources :buys, only: [:create, :destroy]
-    resources :reviews
+    resources :reviews do
+    resources :comments
+    end
   end
 
   resources :users do

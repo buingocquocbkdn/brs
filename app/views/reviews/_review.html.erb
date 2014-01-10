@@ -16,4 +16,32 @@
 	<%= link_to "edit", edit_book_review_path(@book.id, review.id),
 	title: review.content_review %>
 	<% end %>
+	
+	
+    <li class="reviews">
+    	<ul>
+    		<% if review.comments.any? %>
+            <% review.comments.each do |comment|%>
+              <li>
+                <span class="content">
+                  <b><%= User.find(comment.user_id).username %></b>
+                  <i><%= comment.content %></i>
+                </span>
+                <span class="timestamp">
+                  <i>Commented <%= time_ago_in_words(comment.created_at) %> ago.</i>
+                </span>
+                	 <% if current_user?(comment.user) %>
+					 	<%= link_to "delete", book_review_comment_path(@book.id, review.id, comment.id), method: :delete,
+					 		data: { confirm: "You sure?" },
+					 			title: comment.content %>
+					 				<% end %>
+              </li>
+            <%end %>
+            
+  			<% end %>
+            	<%= render :partial => "shared/comment_form", :locals => {  :review => review }%>
+            </ul>
+            
+    </li>
+	
 </li>
