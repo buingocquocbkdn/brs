@@ -12,6 +12,12 @@
       <% categories_array = Category.all.map { |category| [category.name, category.id] } %>
       <%= select_tag "category_id", options_for_select(categories_array) %>
 
+      <%= label_tag "Rate greater than" %>
+      <%= number_field_tag 'rating', nil,  in: 1..5 %>
+
+      <%= label_tag "Number of users favourites" %>
+      <%= text_field_tag :favourite_num, params[:favourite_num] %>
+
       <%= submit_tag "Search", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>

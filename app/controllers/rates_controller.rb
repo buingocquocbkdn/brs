@@ -4,6 +4,7 @@ class RatesController < ApplicationController
   def create
     @rate = Rate.create! book_id: params[:book_id], user_id: current_user.id, rate: params[:rate][:rate]
     @book = Book.find params[:book_id]
+    @book.update_attributes rating: @book.rates.average('rate')
     redirect_to @book
   end
 
@@ -11,6 +12,7 @@ class RatesController < ApplicationController
     rate = Rate.find params[:id]
     rate.destroy!
     @book = Book.find params[:book_id]
+    @book.update_attributes rating: @book.rates.average('rate')
     redirect_to @book
   end
 
@@ -18,6 +20,7 @@ class RatesController < ApplicationController
     @rate = Rate.find params[:id]
     @rate.update_attributes book_id: params[:book_id], user_id: current_user.id, rate: params[:rate][:rate]
     @book = Book.find params[:book_id]
+    @book.update_attributes rating: @book.rates.average('rate')
     redirect_to @book
   end
 
